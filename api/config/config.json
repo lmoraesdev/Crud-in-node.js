@@ -1,23 +1,26 @@
 {
   "development": {
     "username": "postgres",
-    "password": "123456",
-    "database": "seguranca_nodejs_development",
+    "password": "",
+    "database": "seguranca_nodejs_test",
     "host": "127.0.0.1",
+    "port": "5432",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "123456",
+    "password": "",
     "database": "seguranca_nodejs_test",
     "host": "127.0.0.1",
+    "port": "5432",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "123456",
-    "database": "seguranca_nodejs_production",
+    "password": "",
+    "database": "seguranca_nodejs_test",
     "host": "127.0.0.1",
+    "port": "5432",
     "dialect": "postgres"
   }
 }
