@@ -11,7 +11,7 @@ class UsuarioService {
         })
 
         if (usuario) {
-            throw new Error('Usuario ja cadastrado')
+            throw new Error('Usuário já cadastrado')
         }
 
         try {
@@ -63,7 +63,7 @@ class UsuarioService {
 
             return usuario
         } catch (error) {
-            throw new Error('Erro ao editar usuario!')
+            throw new Error('Erro ao editar usuário!')
         }
     }
 
@@ -77,7 +77,7 @@ class UsuarioService {
                 }
             })
         } catch (error) {
-            throw new Error('Erro ao tentar deletar o usuario!')
+            throw new Error('Erro ao tentar deletar o usuário!')
         }
     }
 }

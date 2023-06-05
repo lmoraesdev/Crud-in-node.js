@@ -5,7 +5,9 @@
   "main": "index.js",
   "nodeVersion": "18.15.0",
   "scripts": {
-    "start": "nodemon ./api/index.js"
+    "start": "nodemon ./api/index.js",
+    "test": "npx mocha -w --parallel test/**/*.test.js",
+    "test:cov": "npx nyc mocha --exit --check-leaks --no-parallel test/**/*.test.js"
   },
   "keywords": [],
   "author": "Raphael Lucas Girao de Lima",
