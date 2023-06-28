@@ -6,7 +6,7 @@ const router = Router();
 router
   .post("/seguranca/acl", SegurancaController.cadastrarAcl)
   .post(
-    "/seguranca/permissoes-role",
+    "/seguranca/permissoes-roles",
     SegurancaController.cadastrarPermissoesRoles
   );
 

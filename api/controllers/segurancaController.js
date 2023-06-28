@@ -1,16 +1,15 @@
 const SegurancaService = require("../services/segurancaService");
-
 const segurancaService = new SegurancaService();
 
 class SegurancaController {
   static async cadastrarAcl(req, res) {
-    const { roles, permissioes } = req.body;
+    const { roles, permissoes } = req.body;
     const { usuarioId } = req;
 
     try {
       const acl = await segurancaService.cadastrarAcl({
         roles,
-        permissioes,
+        permissoes,
         usuarioId,
       });
 
@@ -35,4 +34,5 @@ class SegurancaController {
     }
   }
 }
+
 module.exports = SegurancaController;

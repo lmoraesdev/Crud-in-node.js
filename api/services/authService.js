@@ -11,14 +11,15 @@ class AuthService {
         email: dto.email,
       },
     });
+
     if (!usuario) {
-      throw new Error("Usuário não encontrado");
+      throw new Error("Usuario não cadastrado");
     }
 
     const senhaIguais = await compare(dto.senha, usuario.senha);
 
     if (!senhaIguais) {
-      throw new Error("Usuario ou senha invalida");
+      throw new Error("Usuario ou senha invalido");
     }
 
     const accessToken = sign(
@@ -31,7 +32,9 @@ class AuthService {
         expiresIn: 86400,
       }
     );
+
     return { accessToken };
   }
 }
+
 module.exports = AuthService;

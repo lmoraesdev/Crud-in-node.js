@@ -3,17 +3,23 @@ const Sequelize = require("sequelize");
 
 class SegurancaService {
   async cadastrarAcl(dto) {
-    const usuario = await database.usuario.findOne({
+    const usuario = await database.usuarios.findOne({
       include: [
         {
           model: database.roles,
           as: "usuario_roles",
           attributes: ["id", "nome", "descricao"],
+          through: {
+            attributes: [],
+          },
         },
         {
-          model: database.permissao,
-          as: "usuario_permissao",
+          model: database.permissoes,
+          as: "usuario_permissoes",
           attributes: ["id", "nome", "descricao"],
+          through: {
+            attributes: [],
+          },
         },
       ],
       where: {
@@ -22,7 +28,7 @@ class SegurancaService {
     });
 
     if (!usuario) {
-      throw new Error("Usuário não encontrado");
+      throw new Error("Usuario não cadastrado");
     }
 
     const rolesCadastradas = await database.roles.findAll({
@@ -33,7 +39,7 @@ class SegurancaService {
       },
     });
 
-    const permissoescadastradas = await database.permissao.findAll({
+    const permissoesCadastradas = await database.permissoes.findAll({
       where: {
         id: {
           [Sequelize.Op.in]: dto.permissoes,
@@ -45,19 +51,25 @@ class SegurancaService {
     await usuario.removeUsuario_permissoes(usuario.usuario_permissoes);
 
     await usuario.addUsuario_roles(rolesCadastradas);
-    await usuario.addUsuario_permissoes(permissoescadastradas);
+    await usuario.addUsuario_permissoes(permissoesCadastradas);
 
-    const novoUsuario = await database.usuario.findOne({
+    const novoUsuario = await database.usuarios.findOne({
       include: [
         {
           model: database.roles,
           as: "usuario_roles",
           attributes: ["id", "nome", "descricao"],
+          through: {
+            attributes: [],
+          },
         },
         {
-          model: database.permissao,
+          model: database.permissoes,
           as: "usuario_permissoes",
           attributes: ["id", "nome", "descricao"],
+          through: {
+            attributes: [],
+          },
         },
       ],
     });
@@ -72,12 +84,18 @@ class SegurancaService {
           model: database.permissoes,
           as: "roles_das_permissoes",
           attributes: ["id", "nome", "descricao"],
+          through: {
+            attributes: [],
+          },
         },
       ],
+      where: {
+        id: dto.roleId,
+      },
     });
 
     if (!role) {
-      throw new Error("Role não encontrada");
+      throw new Error("Role não cadastrada");
     }
 
     const permissoesCadastradas = await database.permissoes.findAll({
@@ -98,6 +116,9 @@ class SegurancaService {
           model: database.permissoes,
           as: "roles_das_permissoes",
           attributes: ["id", "nome", "descricao"],
+          through: {
+            attributes: [],
+          },
         },
       ],
       where: {
@@ -108,4 +129,5 @@ class SegurancaService {
     return novaRole;
   }
 }
+
 module.exports = SegurancaService;
